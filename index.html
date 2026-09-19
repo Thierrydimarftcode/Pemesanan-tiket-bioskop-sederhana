@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Pemesanan Tiket</title>
+</head>
+<body>
+    
+<h2 align="center">Form Pemesanan Film</h2> <br>
+
+<form action="tiket.php" method="post">
+    <table border="1" cellpadding="3" align="center">
+        <tr>
+            <td>Nama Pemesan</td>
+            <td>:</td>
+            <td><input type="text" name="Nama_Pemesan" placeholder="Masukkan nama anda" size="25" required></td>
+        </tr>
+
+        <tr>
+            <td>Judul Film</td>
+            <td>:</td>
+            <td>
+                <select name="Judul_Film" required>
+                    <option value="">-Pilih Film Anda-</option>
+                    <option value="Dune Part Three">Dune Part Three</option>
+                    <option value="Avengers Doomsday">Avengers Doomsday</option>
+                    <option value="The Odyssey">The Odyssey</option>
+                    <option value="Spiderman Brand New Day">Spiderman Brand New Day</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Jumlah Tiket</td>
+            <td>:</td>
+            <td><input type="number" name="Jumlah_Tiket" min="1" placeholder="Pilih jumlah tiket anda" size="25" required></td>
+        </tr>
+
+        <tr>
+            <td>Tanggal Nonton</td>
+            <td>:</td>
+            <td><input type="date" name="Tanggal_Nonton" size="25" required></td>
+        </tr>
+
+        <tr>
+            <td>Sesi Tayang Film</td>
+            <td>:</td>
+            <td><input type="time" name="Sesi_Tayang_Film"></td>
+        </tr>
+
+        <tr>
+            <td align="center" colspan="3">
+                <button type="submit">Beli</button>
+                <button type="reset">Cancel</button>
+            </td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>
