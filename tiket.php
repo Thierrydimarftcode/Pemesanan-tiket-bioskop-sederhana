@@ -5,11 +5,11 @@ if (!$koneksi) {
     die("Koneksi ke database gagal: " . mysqli_connect_error());
 }
 
-$nama    = $_POST['Nama_Pemesan'];
-$film    = $_POST['Judul_Film'];
-$jumlah  = $_POST['Jumlah_Tiket'];
-$tanggal = $_POST['Tanggal_Nonton'];
-$sesi    = $_POST['Sesi_Tayang_Film'];
+$nama    = $_POST['Nama_Pemesan'] ?? '';
+$film    = $_POST['Judul_Film'] ?? '';
+$jumlah  = $_POST['Jumlah_Tiket'] ?? 0;
+$tanggal = $_POST['Tanggal_Nonton'] ?? '';
+$sesi    = $_POST['Sesi_Tayang_Film'] ?? '';
 
 $harga_per_tiket = 50000;
 $total_harga     = $jumlah * $harga_per_tiket;
@@ -17,58 +17,72 @@ $total_harga     = $jumlah * $harga_per_tiket;
 $query = "INSERT INTO tiket_bioskop (nama_pemesan, judul_film, jumlah_tiket, tanggal_nonton, sesi_tayang, total_harga) 
           VALUES ('$nama', '$film', '$jumlah', '$tanggal', '$sesi', '$total_harga')";
 
+$berhasil = mysqli_query($koneksi, $query);
 ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Hasil Pemesanan Tiket</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Pemesanan Tiket - Cinema XXI</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div align="center">
-        <?php if (mysqli_query($koneksi, $query)) : ?>
-            <h2>🎉 Pemesanan Tiket Berhasil!</h2>
-            <hr width="50%">
-            <table border="0" cellpadding="5">
+    <h2>CINEMA XXI</h2>
+
+    <form style="pointer-events: auto;">
+        <?php if ($berhasil) : ?>
+            <h3 style="text-align: center; color: #d4af37; margin-bottom: 20px;">PEMESANAN BERHASIL</h3>
+            
+            <table>
                 <tr>
-                    <td><strong>Nama Pemesan</strong></td>
+                    <td>Nama Pemesan</td>
                     <td>:</td>
                     <td><?= htmlspecialchars($nama); ?></td>
                 </tr>
                 <tr>
-                    <td><strong>Judul Film</strong></td>
+                    <td>Judul Film</td>
                     <td>:</td>
                     <td><?= htmlspecialchars($film); ?></td>
                 </tr>
                 <tr>
-                    <td><strong>Jumlah Tiket</strong></td>
+                    <td>Jumlah Tiket</td>
                     <td>:</td>
-                    <td><?= $jumlah; ?> Lembar</td>
+                    <td><?= htmlspecialchars($jumlah); ?> Lembar</td>
                 </tr>
                 <tr>
-                    <td><strong>Jadwal Tayang</strong></td>
+                    <td>Jadwal Tayang</td>
                     <td>:</td>
-                    <td><?= $tanggal; ?> | Jam <?= $sesi; ?> WIB</td>
+                    <td><?= htmlspecialchars($tanggal); ?> | <?= htmlspecialchars($sesi); ?> WIB</td>
                 </tr>
                 <tr>
-                    <td><strong>Total Pembayaran</strong></td>
+                    <td>Total Bayar</td>
                     <td>:</td>
-                    <td><strong>Rp <?= number_format($total_harga, 0, ',', '.'); ?></strong></td>
+                    <td style="color: #d4af37; font-weight: bold;">Rp <?= number_format($total_harga, 0, ',', '.'); ?></td>
                 </tr>
             </table>
-            <br>
-            <a href="index.html">← Pesan Tiket Lagi</a>
+
+            <div style="text-align: center; margin-top: 25px;">
+                <a href="index.html" style="text-decoration: none;">
+                    <button type="button">Pesan Tiket Lagi</button>
+                </a>
+            </div>
+
         <?php else : ?>
-            <h2 style="color: red;">❌ Gagal Menyimpan Data!</h2>
-            <p>Error: <?= mysqli_error($koneksi); ?></p>
-            <a href="index.html">← Kembali ke Form</a>
+            <h3 style="text-align: center; color: #e11d48; margin-bottom: 15px;">GAGAL MENYIMPAN DATA</h3>
+            <p style="text-align: center; color: #cccccc; margin-bottom: 20px;">Error: <?= htmlspecialchars(mysqli_error($koneksi)); ?></p>
+            
+            <div style="text-align: center;">
+                <a href="index.html" style="text-decoration: none;">
+                    <button type="button" style="background-color: #333; color: #fff;">Kembali ke Form</button>
+                </a>
+            </div>
         <?php endif; ?>
-    </div>
+    </form>
 
 </body>
 </html>
-
 <?php
 mysqli_close($koneksi);
 ?>
