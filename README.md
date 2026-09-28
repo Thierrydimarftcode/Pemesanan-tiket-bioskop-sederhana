@@ -18,6 +18,8 @@ A lightweight web-based movie ticket booking form built using **HTML5** tables a
 
 ```text
 ├── index.html       # The main movie booking form interface
-├── tiket.php        # Backend processor handling form data via POST method
-├── admin.php        # Admin panel dashboard to view booked tickets from the database
+└──php
+   ├── tiket.php        # Backend processor handling form data via POST method
+   ├── admin.php        # Admin panel dashboard to view booked tickets from the database
+├──css                #Styling the website
 └── README.md        # Project documentation
