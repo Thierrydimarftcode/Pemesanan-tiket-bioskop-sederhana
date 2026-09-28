@@ -1,6 +1,6 @@
 # 🎬 Simple Cinema Ticket Booking System
 
-A lightweight web-based movie ticket booking form built using **HTML5** tables and designed to process reservation data via **PHP** (`tiket.php`).
+A lightweight web-based movie ticket booking form built using **HTML5** tables and designed to process reservation data via **PHP**  (`tiket.php`).
 
 ## 🚀 Features
 
